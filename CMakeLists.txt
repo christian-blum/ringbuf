@@ -1,20 +1,8 @@
-file(
-    GLOB source_files
-    RELATIVE src
-    LIST_DIRECTORIES false
-    "*.c"
-    "*.cpp"
-)
-
-message("------------***************************-----------------")
-message("files:" ${source_files})
-message("------------***************************-----------------")
+FILE(GLOB_RECURSE sources *.c *.cpp)
 
 idf_component_register(
     SRCS
-        ${srcs}
+        ${sources}
     INCLUDE_DIRS
         "include"
-    PRIV_INCLUDE_DIRS
-        "src/include"
 )

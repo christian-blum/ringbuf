@@ -138,7 +138,7 @@ bool ringbuf_iterator_seek(ringbuf_iterator_t *it, size_t logical_index) {
         it->count = rb->count;
 
         if (logical_index < it->count) {
-            it->current_pos = (int64_t)logical_index;
+            it->current_pos = (int32_t)logical_index;
             success = true;
         }
         xSemaphoreGive(rb->mutex);
@@ -166,7 +166,7 @@ bool ringbuf_iterator_seek_newest(ringbuf_iterator_t *it) {
 }
 
 bool ringbuf_iterator_get(ringbuf_iterator_t *it, void *out_element) {
-    if (!it || !it->rb || it->current_pos < 0 || it->current_pos >= (int64_t)it->count) return false;
+    if (!it || !it->rb || it->current_pos < 0 || it->current_pos >= (int32_t)it->count) return false;
 
     ringbuf_handle_t rb = it->rb;
     bool success = false;
@@ -183,7 +183,7 @@ bool ringbuf_iterator_get(ringbuf_iterator_t *it, void *out_element) {
 bool ringbuf_iterator_next(ringbuf_iterator_t *it, void *out_element) {
     if (!it || !it->rb || it->count == 0) return false;
 
-    if (it->current_pos < (int64_t)it->count - 1) {
+    if (it->current_pos < (int32_t)it->count - 1) {
         it->current_pos++;
         return ringbuf_iterator_get(it, out_element);
     }

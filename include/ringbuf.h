@@ -19,7 +19,7 @@ typedef struct {
     size_t capacity;
     size_t tail;
     size_t count;
-    int64_t current_pos;          // Logical position (-1 to count - 1)
+    int32_t current_pos;          // Logical position (-1 to count - 1)
 } ringbuf_iterator_t;
 
 /**
